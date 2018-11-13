@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Погода в Харькове</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title">Погода в Харькове</string>
+    <string name="air_temp">t°C воздуха: </string>
+    <string name="humidity">Влажность: </string>
+    <string name="pressure">Давление: </string>
+    <string name="wind">Ветер: </string>
+    <string name="wind_speed">Скорость ветра: </string>
+
+</resources>
