@@ -9,12 +9,10 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -23,11 +21,10 @@ import java.util.ArrayList;
 
 public class UpdateWidgetService extends Service {
 
-    final String TAG = "myLogs";
-    public Elements text; //текст
+    private Elements text; //текст
     public Elements media; //картинки
     //то в чем будем хранить данные пока не передадим на экран
-    public ArrayList<String> titleList = new ArrayList<>();
+    public final ArrayList<String> titleList = new ArrayList<>();
     RemoteViews remoteViews;
     AppWidgetManager appWidgetManager;
     int[] allWidgetIds;
@@ -46,22 +43,30 @@ public class UpdateWidgetService extends Service {
         scalePics = (float) (widthView / 720.0f);
         picSize = Math.round(128 * scalePics);
 
+
         //AppWidgetManager получает информацию об установленных виджетах
         appWidgetManager = AppWidgetManager.getInstance(this.getApplicationContext());
-        allWidgetIds = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+        try {
+            allWidgetIds = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         new NewThread().execute();
 
-        for (int widgetId : allWidgetIds) {
-            //получаем описание виджета в XML
-            remoteViews = new RemoteViews(this.getApplicationContext().getPackageName(), R.layout.widget_main);
-            //В этой строке регистрируем касание виджета
-            Intent clickIntent = new Intent(this.getApplicationContext(), MainWidget.class);
-            //Указываем что делать (пришло время обновить AppWidget)
-            clickIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            clickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, allWidgetIds);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, clickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            remoteViews.setOnClickPendingIntent(R.id.Widget, pendingIntent);
+        if (allWidgetIds != null) {
+            for (int widgetId : allWidgetIds) {
+                //получаем описание виджета в XML
+                remoteViews = new RemoteViews(this.getApplicationContext().getPackageName(), R.layout.widget_main);
+                //В этой строке регистрируем касание виджета
+                Intent clickIntent = new Intent(this.getApplicationContext(), MainWidget.class);
+                //Указываем что делать (пришло время обновить AppWidget)
+                clickIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                clickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, allWidgetIds);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, clickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                remoteViews.setOnClickPendingIntent(R.id.Widget, pendingIntent);
+                appWidgetManager.updateAppWidget(widgetId, remoteViews);
+            }
         }
         //stopSelf();
         super.onStart(intent, startId);
@@ -85,11 +90,8 @@ public class UpdateWidgetService extends Service {
                 doc = Jsoup.connect("https://tvoj.kharkov.ua/help/weather/").get();
                 //задаем с какого места. Например с заголовков статей
                 text = doc.select(".dat");
-                for (Element txt:text)
-                {Log.d ("UpdateWidgetServiceLog", "txt: "+ txt.toString());}
                 media = doc.select(".cw");
-                String imageURL ="https:" + media.get(0).attr("src");
-                {Log.d ("UpdateWidgetServiceLog", "imageURL: "+ imageURL);}
+                String imageURL = "https:" + media.get(0).attr("src");
                 // Download Image from URL
                 InputStream input = new java.net.URL(imageURL).openStream();
                 // Decode Bitmap
@@ -105,7 +107,7 @@ public class UpdateWidgetService extends Service {
                 titleList.add(text.get(7).text());
 
             } catch (IOException e) {
-                Log.d ("UpdateWidgetService", "error: "+e);
+                //Log.d ("UpdateWidgetService", "error: "+e);
             }
             return scaledPic;
         }
