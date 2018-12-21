@@ -1,7 +1,0 @@
-#Internal package file, do not edit.
-#Tue Nov 13 11:04:15 EET 2018
-0.baseType=DIRECTORY
-0.base=D\:\\Trubnikov\\AndroidShag\\Widget_WeatherNew\\app\\build\\intermediates\\transforms\\dexMerger\\release\\0
-0.path=classes.dex
-0.set=DEX
-count=1

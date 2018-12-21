@@ -1,25 +1,34 @@
 package com.trubnikov.kharkov_weather;
 
 import android.app.PendingIntent;
-import android.app.Service;
 import android.appwidget.AppWidgetManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.IBinder;
+import android.support.v4.app.JobIntentService;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class UpdateWidgetService extends Service {
+/**
+ * Example implementation of a JobIntentService.
+ */
+public class UpdateWidgetService extends JobIntentService {
+    /**
+     * Unique job ID for this service.
+     */
+    static final int JOB_ID = 1000;
 
     private Elements text; //текст
     public Elements media; //картинки
@@ -33,9 +42,18 @@ public class UpdateWidgetService extends Service {
     private Bitmap bitmap, scaledPic;
 
 
-    @Override
-    public void onStart(Intent intent, int startId) {
+    /**
+     * Convenience method for enqueuing work in to this service.
+     */
+    static void enqueueWork(Context context, Intent work) {
+        enqueueWork(context, UpdateWidgetService.class, JOB_ID, work);
+    }
 
+    @Override
+    protected void onHandleWork(Intent intent) {
+        // We have received work to do.  The system or framework is already
+        // holding a wake lock for us at this point, so we can just go.
+        Log.i("UpdateWidgetService", "Executing work: " + intent);
         //вычисляем размеры дисплея и коэффициенты масштабирования
         DisplayMetrics display = this.getResources().getDisplayMetrics();
         widthView = display.widthPixels;
@@ -52,7 +70,7 @@ public class UpdateWidgetService extends Service {
             e.printStackTrace();
         }
 
-        new NewThread().execute();
+        new requestThread().execute();
 
         if (allWidgetIds != null) {
             for (int widgetId : allWidgetIds) {
@@ -68,17 +86,17 @@ public class UpdateWidgetService extends Service {
                 appWidgetManager.updateAppWidget(widgetId, remoteViews);
             }
         }
-        //stopSelf();
-        super.onStart(intent, startId);
+
+        Log.i("UpdateWidgetService", "Completed service @ ");
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     //класс который делает запросы
-    public class NewThread extends AsyncTask<String, Void, Bitmap> {
+    class requestThread extends AsyncTask<String, Void, Bitmap> {
         @Override
         protected Bitmap doInBackground(String... arg) {
             // захват страницы
@@ -87,11 +105,15 @@ public class UpdateWidgetService extends Service {
 
             try {
                 //data sorce
-                doc = Jsoup.connect("https://tvoj.kharkov.ua/help/weather/").get();
+//                doc = Jsoup.connect("https://tvoj.kharkov.ua/help/weather/").get();
+                doc = Jsoup.connect("https://meteopost.com/weather/kharkov/").get();
                 //задаем с какого места. Например с заголовков статей
                 text = doc.select(".dat");
+                for (Element txt:text){
+                    Log.d ("UpdateWidgetService", "txt: "+txt);}
                 media = doc.select(".cw");
-                String imageURL = "https:" + media.get(0).attr("src");
+                String imageURL = "https:" + media.get(1).attr("src");
+//                Log.d ("UpdateWidgetService", "imageURL: "+imageURL);
                 // Download Image from URL
                 InputStream input = new java.net.URL(imageURL).openStream();
                 // Decode Bitmap
@@ -107,7 +129,7 @@ public class UpdateWidgetService extends Service {
                 titleList.add(text.get(7).text());
 
             } catch (IOException e) {
-                //Log.d ("UpdateWidgetService", "error: "+e);
+                Log.d ("UpdateWidgetService", "error: "+e);
             }
             return scaledPic;
         }

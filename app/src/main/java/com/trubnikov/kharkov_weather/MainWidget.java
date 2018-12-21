@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 public class MainWidget extends AppWidgetProvider {
     @Override
@@ -25,7 +26,15 @@ public class MainWidget extends AppWidgetProvider {
         //записываем ссылку, которая содержит несколько allWidgetIds
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, allWidgetIds);
         //запускаем сервис
-        context.startService(intent);
+       //if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+           Log.d ("UpdateWidgetService", "MW startForegroundService");
+           //context.startForegroundService(intent);
+           UpdateWidgetService.enqueueWork(context, intent);
+       /* } else {
+           Log.d ("UpdateWidgetService", "MW startService");
+            context.startService(intent);
+       }*/
+
     }
 
     @Override

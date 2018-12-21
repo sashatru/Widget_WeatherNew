@@ -5,7 +5,7 @@
     android:layout_height="220dp"
     android:background="@drawable/background"
     android:orientation="vertical"
-    android:padding="15dp"
+    android:padding="12dp"
     tools:context=".MainWidget">
 
     <TextView
@@ -19,8 +19,9 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        tools:src="@drawable/ic_launcher" />
 
     <LinearLayout
         android:id="@+id/ll1"

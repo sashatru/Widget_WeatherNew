@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-27:12
+ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-31:12
 MERGED from [com.android.support:support-v4:28.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\402bb6908e911ff9bc7895199ef0948d\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0.aar\142c11a6b719137cd4c4f2841810699e\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\c375c99f35f2cfaf7a41263be5fe4c5f\AndroidManifest.xml:17:1-22:12
@@ -29,33 +29,39 @@ MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\admin\.gradle\cach
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\7c8eedbd72a80dccf8ed30a2f185e22a\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\612632950febc667205235f938caceb2\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\572ea7362718aa1fbd73d01bf43dce71\AndroidManifest.xml:17:1-22:12
-INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-31:12
 	package
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:3:5-44
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:4:5-44
 		INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml
 		INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-27:12
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-31:12
 		INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-27:12
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:1-31:12
 		INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.WAKE_LOCK
+ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:6:5-67
+	android:name
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:6:22-65
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:6:5-79
+ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:7:5-79
 	android:name
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:6:22-76
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:7:22-76
 uses-permission#android.permission.INTERNET
-ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:7:5-67
+ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:8:5-67
 	android:name
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:7:22-64
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:8:22-64
 application
-ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:9:5-25:19
+ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:10:5-29:19
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\ee74c9d45b2bf207f0f2a23b9ff6e443\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\ee74c9d45b2bf207f0f2a23b9ff6e443\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\daf66869f07aadab08449141500bb692\AndroidManifest.xml:22:5-23:19
@@ -63,33 +69,39 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\admin\.gra
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\ee74c9d45b2bf207f0f2a23b9ff6e443\AndroidManifest.xml:22:18-91
 	android:label
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:12:9-41
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:13:9-41
+	tools:ignore
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:15:9-48
 	android:icon
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:11:9-45
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:12:9-45
 	android:allowBackup
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:10:9-35
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:13:9-40
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:14:9-40
 receiver#com.trubnikov.kharkov_weather.MainWidget
-ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:16:9-23:20
+ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:18:9-25:20
 	android:name
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:16:19-44
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:18:19-44
 intent-filter#action:name:android.appwidget.action.APPWIDGET_UPDATE
-ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:17:13-19:29
+ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:19:13-21:29
 action#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:18:17-84
+ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:20:17-84
 	android:name
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:18:25-81
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:20:25-81
 meta-data#android.appwidget.provider
-ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:20:13-22:63
+ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:22:13-24:63
 	android:resource
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:22:17-60
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:24:17-60
 	android:name
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:21:17-58
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:23:17-58
 service#com.trubnikov.kharkov_weather.UpdateWidgetService
-ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:24:9-93
+ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:26:9-28:34
+	android:exported
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:28:9-32
+	android:permission
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:27:9-65
 	android:name
-		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:24:18-82
+		ADDED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml:26:18-82
 uses-sdk
 INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\Trubnikov\AndroidShag\Widget_WeatherNew\app\src\main\AndroidManifest.xml

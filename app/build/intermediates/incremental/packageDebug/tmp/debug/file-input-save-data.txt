@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Tue Nov 13 10:51:14 EET 2018
+#Fri Dec 21 15:15:01 EET 2018
 0.baseType=DIRECTORY
 0.base=D\:\\Trubnikov\\AndroidShag\\Widget_WeatherNew\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 0.path=classes.dex
