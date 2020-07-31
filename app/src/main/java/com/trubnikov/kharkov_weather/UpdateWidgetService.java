@@ -1,5 +1,6 @@
 package com.trubnikov.kharkov_weather;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
@@ -19,7 +20,20 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Authenticator;
+import java.net.HttpURLConnection;
+import java.net.PasswordAuthentication;
+import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 /**
  * Example implementation of a JobIntentService.
@@ -53,7 +67,7 @@ public class UpdateWidgetService extends JobIntentService {
     protected void onHandleWork(Intent intent) {
         // We have received work to do.  The system or framework is already
         // holding a wake lock for us at this point, so we can just go.
-        Log.i("UpdateWidgetService", "Executing work: " + intent);
+        //Log.i("UpdateWidgetService", "Executing work: " + intent);
         //вычисляем размеры дисплея и коэффициенты масштабирования
         DisplayMetrics display = this.getResources().getDisplayMetrics();
         widthView = display.widthPixels;
@@ -87,7 +101,7 @@ public class UpdateWidgetService extends JobIntentService {
             }
         }
 
-        Log.i("UpdateWidgetService", "Completed service @ ");
+        //Log.i("UpdateWidgetService", "Completed service @ ");
     }
 
     @Override
@@ -106,19 +120,14 @@ public class UpdateWidgetService extends JobIntentService {
             try {
                 //data sorce
 //                doc = Jsoup.connect("https://tvoj.kharkov.ua/help/weather/").get();
-                doc = Jsoup.connect("https://meteopost.com/weather/kharkov/").get();
+
+                doc = Jsoup.connect("https://meteopost.com/weather/kharkov/")
+                        .sslSocketFactory(socketFactory())
+                        .get();
                 //задаем с какого места. Например с заголовков статей
                 text = doc.select(".dat");
                 for (Element txt:text){
                     Log.d ("UpdateWidgetService", "txt: "+txt);}
-                media = doc.select(".cw");
-                String imageURL = "https:" + media.get(1).attr("src");
-//                Log.d ("UpdateWidgetService", "imageURL: "+imageURL);
-                // Download Image from URL
-                InputStream input = new java.net.URL(imageURL).openStream();
-                // Decode Bitmap
-                bitmap = BitmapFactory.decodeStream(input);
-                scaledPic = Bitmap.createScaledBitmap(bitmap, picSize, picSize, true);
                 //чистим ArrayList перед заполнением
                 titleList.clear();
                 //записываем в ArrayList
@@ -127,6 +136,22 @@ public class UpdateWidgetService extends JobIntentService {
                 titleList.add(text.get(4).text());
                 titleList.add(text.get(6).text());
                 titleList.add(text.get(7).text());
+
+                media = doc.select(".cw");
+                String imageURL = "https:" + media.get(1).attr("src");
+                Log.d ("UpdateWidgetService", "imageURL: "+imageURL);
+                // Download Image from URL
+                URL url = new URL(imageURL);
+
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                connection.setSSLSocketFactory(socketFactory());
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+
+                // Decode Bitmap
+                bitmap = BitmapFactory.decodeStream(input);
+                scaledPic = Bitmap.createScaledBitmap(bitmap, picSize, picSize, true);
 
             } catch (IOException e) {
                 Log.d ("UpdateWidgetService", "error: "+e);
@@ -152,5 +177,37 @@ public class UpdateWidgetService extends JobIntentService {
             }
         }
     }
+
+    @SuppressLint("TrustAllX509TrustManager")
+    private SSLSocketFactory socketFactory() {
+
+        final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+        @Override
+        public void checkClientTrusted(
+                java.security.cert.X509Certificate[] chain,
+                String authType) {
+        }
+
+        @Override
+        public void checkServerTrusted(
+                java.security.cert.X509Certificate[] chain,
+                String authType) {
+        }
+
+        @Override
+        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+            return new java.security.cert.X509Certificate[0];
+        }
+    }};
+
+        try {
+            final SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+            return sslContext.getSocketFactory();
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            throw new RuntimeException("Failed to create a SSL socket factory", e);
+        }
+    }
+
 
 }
