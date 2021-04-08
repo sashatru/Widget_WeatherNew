@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.support.v4.app.JobIntentService;
+import androidx.core.app.JobIntentService;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -20,13 +20,9 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.Authenticator;
-import java.net.HttpURLConnection;
-import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -122,7 +118,6 @@ public class UpdateWidgetService extends JobIntentService {
 //                doc = Jsoup.connect("https://tvoj.kharkov.ua/help/weather/").get();
 
                 doc = Jsoup.connect("https://meteopost.com/weather/kharkov/")
-                        .sslSocketFactory(socketFactory())
                         .get();
                 //задаем с какого места. Например с заголовков статей
                 text = doc.select(".dat");
@@ -131,11 +126,11 @@ public class UpdateWidgetService extends JobIntentService {
                 //чистим ArrayList перед заполнением
                 titleList.clear();
                 //записываем в ArrayList
-                titleList.add(text.get(0).text());
-                titleList.add(text.get(3).text());
+                titleList.add(text.get(1).text());
                 titleList.add(text.get(4).text());
-                titleList.add(text.get(6).text());
+                titleList.add(text.get(5).text());
                 titleList.add(text.get(7).text());
+                titleList.add(text.get(8).text());
 
                 media = doc.select(".cw");
                 String imageURL = "https:" + media.get(1).attr("src");
@@ -144,7 +139,6 @@ public class UpdateWidgetService extends JobIntentService {
                 URL url = new URL(imageURL);
 
                 HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-                connection.setSSLSocketFactory(socketFactory());
                 connection.setDoInput(true);
                 connection.connect();
                 InputStream input = connection.getInputStream();
@@ -177,37 +171,5 @@ public class UpdateWidgetService extends JobIntentService {
             }
         }
     }
-
-    @SuppressLint("TrustAllX509TrustManager")
-    private SSLSocketFactory socketFactory() {
-
-        final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
-        @Override
-        public void checkClientTrusted(
-                java.security.cert.X509Certificate[] chain,
-                String authType) {
-        }
-
-        @Override
-        public void checkServerTrusted(
-                java.security.cert.X509Certificate[] chain,
-                String authType) {
-        }
-
-        @Override
-        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-            return new java.security.cert.X509Certificate[0];
-        }
-    }};
-
-        try {
-            final SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-            return sslContext.getSocketFactory();
-        } catch (NoSuchAlgorithmException | KeyManagementException e) {
-            throw new RuntimeException("Failed to create a SSL socket factory", e);
-        }
-    }
-
 
 }
